@@ -48,19 +48,19 @@ public class Main {
             int random = (int) (Math.random() * signs.length);
             exercise = i + ". " + random1 + " " + signs[random] + " " + random2Str;
             switch (signs[random]) {
-                case '+' -> {
+                case '+':
                     answers.add(Integer.toString(random1 + random2));
                     nOfAdditions++;
-                }
-                case '-' -> {
+                    break;
+                case '-':
                     answers.add(Integer.toString(random1 - random2));
                     nOfSubtractions++;
-                }
-                case '*' -> {
+                    break;
+                case '*':
                     answers.add(Integer.toString(random1 * random2));
                     nOfMultiplications++;
-                }
-                case ':' -> {
+                    break;
+                case ':':
                     double result = (int) Math.round(((double) random1 / (double) random2) * Math.pow(10, CALCULATION_ACCURACY)) / Math.pow(10, CALCULATION_ACCURACY);
                     String resultStr = Double.toString(result);
                     if (resultStr.endsWith(".0")) {
@@ -68,7 +68,7 @@ public class Main {
                     }
                     answers.add(resultStr);
                     nOfDivisions++;
-                }
+                    break;
             }
             System.out.println(exercise);
         }
