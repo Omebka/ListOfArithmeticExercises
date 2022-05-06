@@ -12,17 +12,16 @@ public class Main {
     private static final char MULTIPLICATION_CHAR = '*';
     private static final char DIVISION_CHAR = ':';
 
-    private static final int TIME_FOR_ADDITION = 5; //секунд для выполнения сложения
-    private static final int TIME_FOR_SUBTRACTION = 5; //секунд для выполнения вычитания
-    private static final int TIME_FOR_MULTIPLICATION = 10; //секунд для выполнения умножения
-    private static final int TIME_FOR_DIVISION = 30; //секунд для выполнения деления
+    private static final int SECONDS_FOR_ADDITION = 5; //секунд для выполнения сложения
+    private static final int SECONDS_FOR_SUBTRACTION = 5; //секунд для выполнения вычитания
+    private static final int SECONDS_FOR_MULTIPLICATION = 10; //секунд для выполнения умножения
+    private static final int SECONDS_FOR_DIVISION = 30; //секунд для выполнения деления
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String stringOfSigns = scanner.nextLine();
         char[] signs = stringOfSigns.toCharArray();
 
-        String exercise;
         int nOfAdditions = 0;
         int nOfSubtractions = 0;
         int nOfMultiplications = 0;
@@ -50,7 +49,7 @@ public class Main {
             }
 
             int random = (int) (Math.random() * signs.length);
-            exercise = i + ". " + randomNum1 + " " + signs[random] + " " + randomNum2Str;
+            String exercise = i + ". " + randomNum1 + " " + signs[random] + " " + randomNum2Str;
             switch (signs[random]) {
                 case ADDITION_CHAR:
                     answers.add(Integer.toString(randomNum1 + randomNum2));
@@ -78,27 +77,33 @@ public class Main {
             System.out.println(exercise);
         }
 
-        int timeWanted = nOfAdditions * TIME_FOR_ADDITION +
-                nOfSubtractions * TIME_FOR_SUBTRACTION +
-                nOfMultiplications * TIME_FOR_MULTIPLICATION +
-                nOfDivisions * TIME_FOR_DIVISION;
+        try {
+            int timeWanted = nOfAdditions * SECONDS_FOR_ADDITION +
+                    nOfSubtractions * SECONDS_FOR_SUBTRACTION +
+                    nOfMultiplications * SECONDS_FOR_MULTIPLICATION +
+                    nOfDivisions * SECONDS_FOR_DIVISION;
 
-        int timeMinute = timeWanted / 60;
-        String minutes = Integer.toString(timeMinute);
-        if (timeMinute < 10) {
-            minutes = "0" + minutes;
+            int timeMinute = timeWanted / 60;
+            String minutes = Integer.toString(timeMinute);
+            if (timeMinute < 10) {
+                minutes = "0" + minutes;
+            }
+
+            int timeSeconds = timeWanted % 60;
+            String seconds = Integer.toString(timeSeconds);
+            if (timeSeconds < 10) {
+                seconds = "0" + seconds;
+            }
+
+            System.out.println("\nУ вас есть " + minutes + ":" + seconds + ", чтобы решить примеры!");
+            for (int j = 0; j < timeWanted; j++) {
+                Thread.sleep(1000);
+            }
+        }
+        catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
 
-        int timeSeconds = timeWanted % 60;
-        String seconds = Integer.toString(timeSeconds);
-        if (timeSeconds < 10) {
-            seconds = "0" + seconds;
-        }
-
-        System.out.println("\nУ вас есть " + minutes + ":" + seconds + ", чтобы решить примеры!");
-        for (int j = 0; j < timeWanted; j++) {
-            Thread.sleep(1000);
-        }
         System.out.println("Время вышло!");
 
         System.out.println("\nОтветы:");
