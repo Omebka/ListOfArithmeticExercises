@@ -7,6 +7,11 @@ public class Main {
     private static final int MAX = 20; //верхняя граница диапазона значений чисел в примерах
     private static final int CALCULATION_ACCURACY = 2;
 
+    private static final char ADDITION_CHAR = '+';
+    private static final char SUBTRACTION_CHAR = '-';
+    private static final char MULTIPLICATION_CHAR = '*';
+    private static final char DIVISION_CHAR = ':';
+
     private static final int TIME_FOR_ADDITION = 5; //секунд для выполнения сложения
     private static final int TIME_FOR_SUBTRACTION = 5; //секунд для выполнения вычитания
     private static final int TIME_FOR_MULTIPLICATION = 10; //секунд для выполнения умножения
@@ -27,41 +32,41 @@ public class Main {
         System.out.println("Решите данные примеры:");
 
         for (int i = 1; i <= NUMBER_OF_EXERCISES; i++) {
-            int random1 = 0;
-            while (random1 == 0) {
-                random1 = (int) (Math.random() * (MAX + 1 - MIN) + MIN);
+            int randomNum1 = 0;
+            while (randomNum1 == 0) {
+                randomNum1 = (int) (Math.random() * (MAX + 1 - MIN) + MIN);
             }
 
-            int random2 = 0;
-            while (random2 == 0) {
-                random2 = (int) (Math.random() * (MAX + 1 - MIN) + MIN);
+            int randomNum2 = 0;
+            while (randomNum2 == 0) {
+                randomNum2 = (int) (Math.random() * (MAX + 1 - MIN) + MIN);
             }
 
-            String random2Str;
-            if (random2 < 0) {
-                random2Str = "(" + random2 + ")";
-            }
-            else {
-                random2Str = random2 + "";
+            String randomNum2Str;
+            if (randomNum2 < 0) {
+                randomNum2Str = "(" + randomNum2 + ")";
+            } else {
+                randomNum2Str = Integer.toString(randomNum2);
             }
 
             int random = (int) (Math.random() * signs.length);
-            exercise = i + ". " + random1 + " " + signs[random] + " " + random2Str;
+            exercise = i + ". " + randomNum1 + " " + signs[random] + " " + randomNum2Str;
             switch (signs[random]) {
-                case '+':
-                    answers.add(Integer.toString(random1 + random2));
+                case ADDITION_CHAR:
+                    answers.add(Integer.toString(randomNum1 + randomNum2));
                     nOfAdditions++;
                     break;
-                case '-':
-                    answers.add(Integer.toString(random1 - random2));
+                case SUBTRACTION_CHAR:
+                    answers.add(Integer.toString(randomNum1 - randomNum2));
                     nOfSubtractions++;
                     break;
-                case '*':
-                    answers.add(Integer.toString(random1 * random2));
+                case MULTIPLICATION_CHAR:
+                    answers.add(Integer.toString(randomNum1 * randomNum2));
                     nOfMultiplications++;
                     break;
-                case ':':
-                    double result = (int) Math.round(((double) random1 / (double) random2) * Math.pow(10, CALCULATION_ACCURACY)) / Math.pow(10, CALCULATION_ACCURACY);
+                case DIVISION_CHAR:
+                    double result = (int) Math.round(((double) randomNum1 / (double) randomNum2) * Math.pow(10, CALCULATION_ACCURACY)) /
+                            Math.pow(10, CALCULATION_ACCURACY);
                     String resultStr = Double.toString(result);
                     if (resultStr.endsWith(".0")) {
                         resultStr = Integer.toString((int) result);
